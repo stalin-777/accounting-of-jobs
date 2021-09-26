@@ -56,7 +56,7 @@ const (
 	RETURNING id;`
 )
 
-var ErrConstraintPgx = "Пользователь с таким именем уже существует. Обновить данные пользователя? Y/N"
+var ErrConstraintPgx = errors.New("Пользователь с таким именем уже существует. Обновить данные пользователя? Y/N")
 
 func (s *WorkplaceService) Workplace(id int) (*aoj.Workplace, error) {
 
@@ -121,7 +121,7 @@ func (s *WorkplaceService) CreateWorkplace(w *aoj.Workplace) error {
 		var pgErr *pgconn.PgError
 		if stderrors.As(err, &pgErr) {
 			if pgErr.Code == pgerrcode.UniqueViolation && pgErr.ConstraintName == "workplace_username_key" {
-				return errors.New(ErrConstraintPgx)
+				return ErrConstraintPgx
 			}
 		}
 		return err

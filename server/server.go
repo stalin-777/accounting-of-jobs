@@ -2,12 +2,12 @@ package server
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/stalin-777/accounting-of-jobs/http"
+	"github.com/stalin-777/accounting-of-jobs/logger"
 	"github.com/stalin-777/accounting-of-jobs/postgres"
 )
 
@@ -21,13 +21,14 @@ func Run(port int, connPool *pgxpool.Pool) {
 
 	server, err := getRouter(connPool)
 	if err != nil {
-		log.Fatalf("Failed to ger router, error:%s", err.Error())
+		logger.Fatalf("Failed to ger router, error:%s", err.Error())
 	}
 
 	routerSocket := fmt.Sprintf("localhost:%v", port)
-	log.Printf("Service is running on socket %v", routerSocket)
+	fmt.Printf("Service is running on socket %v\n", routerSocket)
+	logger.Infof("Service is running on socket %v\n", routerSocket)
 	if err := server.Router.Start(routerSocket); err != nil {
-		log.Fatalf("Failed to start service, error:%s", err.Error())
+		logger.Fatalf("Failed to start service, error:%s", err.Error())
 	}
 }
 

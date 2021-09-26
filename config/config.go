@@ -16,6 +16,14 @@ type Config struct {
 		Password string `validate:"required"`
 		Dbname   string `validate:"required"`
 	}
+	Logger struct {
+		FileName       string `validate:"required"`
+		Path           string `validate:"required"`
+		MaxSize        int    `validate:"required"`
+		MaxRequestSize int    `validate:"required"`
+		MaxBackups     int    `validate:"required"`
+		MaxAge         int    `validate:"required"`
+	}
 }
 
 func Init() (*Config, error) {

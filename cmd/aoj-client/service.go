@@ -69,7 +69,7 @@ func (s *WorkplaceService) CreateWorkplace(w *aoj.Workplace) error {
 
 	err := s.sendRequest()
 	if err != nil {
-		if err.Error() == postgres.ErrConstraintPgx {
+		if err == postgres.ErrConstraintPgx {
 
 			fmt.Println(err.Error())
 			err = nil

@@ -5,3 +5,10 @@ db:
   username: 
   password: 
   dbname: 
+logger:
+  filename:
+  path:
+  maxrequestsize: 10
+  maxsize: 10
+  maxbackups: 0
+  maxage: 0
