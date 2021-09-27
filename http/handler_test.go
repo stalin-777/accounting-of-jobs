@@ -15,13 +15,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var (
-	// mockDB = map[int]*aoj.Workplace{
-	// 	1: &aoj.Workplace{1, "localhost", net.ParseIP("127.0.0.1"), "user1"},
-	// }
-	workplaceJSON = `{"data":{"id":1,"hostname":"localhost","ip":"127.0.0.1","username":"user1"},"success":true}
+var workplaceJSON = `{"data":{"id":1,"hostname":"localhost","ip":"127.0.0.1","username":"user1"},"success":true}
 `
-)
 
 func TestHandler_Workplace(t *testing.T) {
 
@@ -61,6 +56,5 @@ func TestHandler_Workplace(t *testing.T) {
 		}
 		assert.Equal(t, http.StatusOK, rec.Code)
 		assert.Equal(t, workplaceJSON, rec.Body.String())
-
 	}
 }
