@@ -62,12 +62,6 @@ func Warn(args ...interface{}) {
 func Warnf(template string, args ...interface{}) {
 	loggerInstance.Sugar().Warnf(template, args...)
 }
-func Error(args ...interface{}) {
-	loggerInstance.Sugar().Error(args...)
-}
-func Errorf(template string, args ...interface{}) {
-	loggerInstance.Sugar().Errorf(template, args...)
-}
 func Fatal(args ...interface{}) {
 	loggerInstance.Sugar().Fatal(args...)
 }

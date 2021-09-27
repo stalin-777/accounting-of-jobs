@@ -27,7 +27,7 @@ func (h *Handler) Workplace(c echo.Context) error {
 		return respondWithErrorStatus(c, http.StatusBadRequest, err.Error())
 	}
 
-	logger.Infof("Successful attempt to get a workplace. ID: %s", id)
+	logger.Infof("Successful attempt to get a workplace. ID: %v", id)
 	return respondWithData(c, workplace)
 }
 
@@ -63,7 +63,7 @@ func (h *Handler) CreateWorkplace(c echo.Context) error {
 		return respondWithErrorStatus(c, http.StatusBadRequest, err.Error())
 	}
 
-	logger.Infof("Successful attempt to create a workplace. ID:", workplace.ID)
+	logger.Infof("Successful attempt to create a workplace. ID:%v", workplace.ID)
 	return respondWithData(c, workplace)
 }
 
