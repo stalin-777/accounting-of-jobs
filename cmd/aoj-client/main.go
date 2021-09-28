@@ -53,7 +53,7 @@ func main() {
 
 		if workplace.ID == 0 {
 
-			handler.Workplaces()
+			handler.FindWorkplaces()
 
 			resp := (service.Response.Data).(*[]aoj.Workplace)
 			for _, wp := range *resp {
@@ -66,7 +66,7 @@ func main() {
 			}
 		} else {
 
-			service.Response.Data, _ = handler.Workplace(workplace.ID)
+			service.Response.Data, _ = handler.FindWorkplace(workplace.ID)
 
 			resp := (service.Response.Data).(*aoj.Workplace)
 

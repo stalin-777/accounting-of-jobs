@@ -50,8 +50,8 @@ func (s *Server) registerHandlers() {
 	var h http.Handler
 	h.WorkplaceService = &s.WorkplaceService
 
-	s.Router.GET("/workplaces/:id", h.Workplace)
-	s.Router.GET("/workplaces", h.Workplaces)
+	s.Router.GET("/workplaces/:id", h.FindWorkplace)
+	s.Router.GET("/workplaces", h.FindWorkplaces)
 	s.Router.POST("/workplaces", h.CreateWorkplace)
 	s.Router.PUT("/workplaces/:id", h.UpdateWorkplace)
 	s.Router.DELETE("/workplaces/:id", h.DeleteWorkplace)

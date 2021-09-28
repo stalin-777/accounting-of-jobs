@@ -58,7 +58,7 @@ const (
 
 var ErrConstraintPgx = errors.New("Пользователь с таким именем уже существует. Обновить данные пользователя? Y/N")
 
-func (s *WorkplaceService) Workplace(id int) (*aoj.Workplace, error) {
+func (s *WorkplaceService) FindWorkplace(id int) (*aoj.Workplace, error) {
 
 	var w aoj.Workplace
 
@@ -75,7 +75,7 @@ func (s *WorkplaceService) Workplace(id int) (*aoj.Workplace, error) {
 	return &w, nil
 }
 
-func (s *WorkplaceService) Workplaces() ([]*aoj.Workplace, error) {
+func (s *WorkplaceService) FindWorkplaces() ([]*aoj.Workplace, error) {
 
 	rows, err := s.DB.Query(context.Background(), dbFindWorkplaces)
 	if err != nil {

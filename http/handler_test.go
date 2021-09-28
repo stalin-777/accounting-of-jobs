@@ -18,7 +18,7 @@ import (
 var workplaceJSON = `{"data":{"id":1,"hostname":"localhost","ip":"127.0.0.1","username":"user1"},"success":true}
 `
 
-func TestHandler_Workplace(t *testing.T) {
+func TestHandler_FindWorkplace(t *testing.T) {
 
 	// Setup
 	err := logger.InitZapLogger(
@@ -41,7 +41,7 @@ func TestHandler_Workplace(t *testing.T) {
 	c.SetParamValues("1")
 
 	wps := &mock.WorkplaceService{}
-	wps.WorkplaceFn = func(id int) (*aoj.Workplace, error) {
+	wps.FindWorkplaceFn = func(id int) (*aoj.Workplace, error) {
 		if id == 1 {
 			return &aoj.Workplace{1, "localhost", net.ParseIP("127.0.0.1"), "user1"}, nil
 		}
@@ -50,8 +50,8 @@ func TestHandler_Workplace(t *testing.T) {
 	h := &Handler{WorkplaceService: wps}
 
 	// Assertions
-	if assert.NoError(t, h.Workplace(c)) {
-		if !wps.WorkplaceInvoked {
+	if assert.NoError(t, h.FindWorkplace(c)) {
+		if !wps.FindWorkplaceInvoked {
 			t.Fatal("expected Workplace() to be invoked")
 		}
 		assert.Equal(t, http.StatusOK, rec.Code)

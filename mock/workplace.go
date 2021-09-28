@@ -5,11 +5,11 @@ import (
 )
 
 type WorkplaceService struct {
-	WorkplaceFn      func(id int) (*aoj.Workplace, error)
-	WorkplaceInvoked bool
+	FindWorkplaceFn      func(id int) (*aoj.Workplace, error)
+	FindWorkplaceInvoked bool
 
-	WorkplacesFn      func() ([]*aoj.Workplace, error)
-	WorkplacesInvoked bool
+	FindWorkplacesFn      func() ([]*aoj.Workplace, error)
+	FindWorkplacesInvoked bool
 
 	CreateWorkplaceFn      func(w *aoj.Workplace) error
 	CreateWorkplaceInvoked bool
@@ -21,16 +21,16 @@ type WorkplaceService struct {
 	DeleteWorkplaceInvoked bool
 }
 
-func (s *WorkplaceService) Workplace(id int) (*aoj.Workplace, error) {
+func (s *WorkplaceService) FindWorkplace(id int) (*aoj.Workplace, error) {
 
-	s.WorkplaceInvoked = true
-	return s.WorkplaceFn(id)
+	s.FindWorkplaceInvoked = true
+	return s.FindWorkplaceFn(id)
 }
 
-func (s *WorkplaceService) Workplaces() ([]*aoj.Workplace, error) {
+func (s *WorkplaceService) FindWorkplaces() ([]*aoj.Workplace, error) {
 
-	s.WorkplacesInvoked = true
-	return s.WorkplacesFn()
+	s.FindWorkplacesInvoked = true
+	return s.FindWorkplacesFn()
 }
 func (s *WorkplaceService) CreateWorkplace(wp *aoj.Workplace) error {
 
@@ -39,11 +39,11 @@ func (s *WorkplaceService) CreateWorkplace(wp *aoj.Workplace) error {
 }
 func (s *WorkplaceService) UpdateWorkplace(wp *aoj.Workplace) error {
 
-	s.WorkplaceInvoked = true
+	s.FindWorkplaceInvoked = true
 	return s.UpdateWorkplaceFn(wp)
 }
 func (s *WorkplaceService) DeleteWorkplace(id int) error {
 
-	s.WorkplaceInvoked = true
+	s.FindWorkplaceInvoked = true
 	return s.DeleteWorkplaceFn(id)
 }

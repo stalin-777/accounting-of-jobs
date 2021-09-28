@@ -13,7 +13,7 @@ type Handler struct {
 }
 
 //Workplace - get workplace by ID
-func (h *Handler) Workplace(c echo.Context) error {
+func (h *Handler) FindWorkplace(c echo.Context) error {
 
 	id, err := getIDFromRequest(c.Param("id"))
 	if err != nil {
@@ -21,7 +21,7 @@ func (h *Handler) Workplace(c echo.Context) error {
 		return respondWithErrorStatus(c, http.StatusBadRequest, err.Error())
 	}
 
-	workplace, err := h.WorkplaceService.Workplace(id)
+	workplace, err := h.WorkplaceService.FindWorkplace(id)
 	if err != nil {
 		logger.Warn(err)
 		return respondWithErrorStatus(c, http.StatusBadRequest, err.Error())
@@ -32,9 +32,9 @@ func (h *Handler) Workplace(c echo.Context) error {
 }
 
 //Workplaces - get list workplaces
-func (h *Handler) Workplaces(c echo.Context) error {
+func (h *Handler) FindWorkplaces(c echo.Context) error {
 
-	workplaces, err := h.WorkplaceService.Workplaces()
+	workplaces, err := h.WorkplaceService.FindWorkplaces()
 	if err != nil {
 		logger.Warn(err)
 		return respondWithErrorStatus(c, http.StatusBadRequest, err.Error())

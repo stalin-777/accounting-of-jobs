@@ -10,8 +10,8 @@ type Workplace struct {
 }
 
 type WorkplaceService interface {
-	Workplace(id int) (*Workplace, error)
-	Workplaces() ([]*Workplace, error)
+	FindWorkplace(id int) (*Workplace, error)
+	FindWorkplaces() ([]*Workplace, error)
 	CreateWorkplace(w *Workplace) error
 	UpdateWorkplace(w *Workplace) error
 	DeleteWorkplace(id int) error

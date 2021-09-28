@@ -36,7 +36,7 @@ type ServiceResponse struct {
 	Data    interface{}
 }
 
-func (s *WorkplaceService) Workplace(id int) (*aoj.Workplace, error) {
+func (s *WorkplaceService) FindWorkplace(id int) (*aoj.Workplace, error) {
 
 	s.URL = fmt.Sprintf("%s/%v", url, id)
 	s.Response.Data = &aoj.Workplace{}
@@ -51,7 +51,7 @@ func (s *WorkplaceService) Workplace(id int) (*aoj.Workplace, error) {
 	return resp, nil
 }
 
-func (s *WorkplaceService) Workplaces() ([]*aoj.Workplace, error) {
+func (s *WorkplaceService) FindWorkplaces() ([]*aoj.Workplace, error) {
 
 	s.Response.Data = &[]aoj.Workplace{}
 
