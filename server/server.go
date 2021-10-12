@@ -6,6 +6,7 @@ import (
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/stalin-777/accounting-of-jobs/config"
 	"github.com/stalin-777/accounting-of-jobs/http"
 	"github.com/stalin-777/accounting-of-jobs/logger"
 	"github.com/stalin-777/accounting-of-jobs/postgres"
@@ -17,22 +18,21 @@ type Server struct {
 	WorkplaceService postgres.WorkplaceService
 }
 
-func Run(port int, connPool *pgxpool.Pool) {
+func Run(cfg *config.Config, connPool *pgxpool.Pool) {
 
-	server, err := getRouter(connPool)
+	server, err := getRouter(cfg, connPool)
 	if err != nil {
 		logger.Fatalf("Failed to ger router, error:%s", err.Error())
 	}
 
-	routerSocket := fmt.Sprintf("localhost:%v", port)
-	fmt.Printf("Service is running on socket %v\n", routerSocket)
+	routerSocket := fmt.Sprintf("%s:%v", cfg.Web.Host, cfg.Web.Port)
 	logger.Infof("Service is running on socket %v\n", routerSocket)
 	if err := server.Router.Start(routerSocket); err != nil {
 		logger.Fatalf("Failed to start service, error:%s", err.Error())
 	}
 }
 
-func getRouter(connPool *pgxpool.Pool) (*Server, error) {
+func getRouter(cfg *config.Config, connPool *pgxpool.Pool) (*Server, error) {
 
 	s := &Server{
 		Router:           echo.New(),
@@ -48,6 +48,11 @@ func getRouter(connPool *pgxpool.Pool) (*Server, error) {
 func (s *Server) registerHandlers() {
 
 	var h http.Handler
+
+	s.Router.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "API status: online")
+	})
+
 	h.WorkplaceService = &s.WorkplaceService
 
 	s.Router.GET("/workplaces/:id", h.FindWorkplace)

@@ -1,4 +1,6 @@
-webPort: 
+web:
+  host: 
+  port: 
 db:
   host: 
   port: 

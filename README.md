@@ -22,6 +22,12 @@
 Для запуска сервера нужно:
 1. Инициализировать файл config.yaml. Предпочтительно, сдетать его копию с названием config.local.yaml
 2. Создать БД postgresql. При запуске сервера, нужные таблицы сами появятся в базе
+БД можно создать при помощи Docker:
+docker run --rm --name postgres-aoj -e POSTGRES_PASSWORD=qwerty -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -d -p 5432:5432 postgres
+3. Создание контейнера:
+docker build --tag aoj-srv .
+3. Запуск сервера : 
+docker run --name aoj -p 8088:8088 --link postgres-aoj:localhost aoj-srv
 
 Клиент запускается с параметрами
 При запуске без параметров создается новое рабочее место с параметрами текущей системы

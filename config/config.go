@@ -8,8 +8,11 @@ import (
 )
 
 type Config struct {
-	WebPort int `validate:"required"`
-	DB      struct {
+	Web struct {
+		Host string `validate:"required"`
+		Port int    `validate:"required"`
+	}
+	DB struct {
 		Host     string `validate:"required"`
 		Port     uint16 `validate:"required"`
 		Username string `validate:"required"`

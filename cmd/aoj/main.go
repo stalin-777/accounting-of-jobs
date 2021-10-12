@@ -37,5 +37,5 @@ func main() {
 		logger.Fatal(err)
 	}
 
-	server.Run(cfg.WebPort, connPool)
+	server.Run(cfg, connPool)
 }
